@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QTextEdit
-from PyQt5.QtCore import QTimer, Qt
+from PyQt5.QtCore import Qt
 
 def addnum(num):
     global num1
@@ -10,12 +10,14 @@ def addnum(num):
     else:
         num2 += num
     displaytext += num
+    refresh()
 
 def addsymbol(symbol):
     global other
     global displaytext
     other = symbol
     displaytext += symbol
+    refresh()
 
 def add1():
     addnum('1')
@@ -90,6 +92,7 @@ def equals():
         result = None
         displaytext = ''
         total = None
+    refresh()
 
 def refresh():
     global total
@@ -118,6 +121,7 @@ def reset():
     other = None
     result = None
     displaytext = ''
+    refresh()
 
 def erase():
     global total
@@ -157,6 +161,7 @@ def erase():
         result = None
         displaytext = ''
         total = None
+    refresh()
 
 def power(var):
     global result
@@ -177,6 +182,7 @@ def power(var):
         result = None
         displaytext = ''
         total = None
+    refresh()
 
 def erasef(x):
     localvar = ''
@@ -189,9 +195,11 @@ def erasef(x):
 
 def square():
     power(2)
+    refresh()
 
 def squareroot():
     power(1/2)
+    refresh()
 
 app = QApplication([])
 w = QWidget()
@@ -257,7 +265,6 @@ lh5.addWidget(pb19)
 lh5.addWidget(pb20)
 lv1.addLayout(lh5)
 w.setLayout(lv1)
-timer = QTimer()
 w.show()
 pb1.clicked.connect(add1)
 pb2.clicked.connect(add2)
@@ -279,6 +286,4 @@ pb17.clicked.connect(reset)
 pb18.clicked.connect(erase)
 pb19.clicked.connect(square)
 pb20.clicked.connect(squareroot)
-timer.timeout.connect(refresh)
-timer.start(2)
 app.exec_()
