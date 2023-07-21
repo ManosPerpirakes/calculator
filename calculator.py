@@ -195,11 +195,9 @@ def erasef(x):
 
 def square():
     power(2)
-    refresh()
 
 def squareroot():
     power(1/2)
-    refresh()
 
 app = QApplication([])
 w = QWidget()
