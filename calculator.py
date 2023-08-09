@@ -202,6 +202,7 @@ def squareroot():
 def calculate():
     result = None
     number = input_prompt.text()
+    input_prompt.clear()
     symbols = ['/', '*', '+', '-']
     for i in symbols:
         if i in number:
