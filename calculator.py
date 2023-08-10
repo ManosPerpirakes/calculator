@@ -200,26 +200,29 @@ def squareroot():
     power(1/2)
 
 def calculate():
-    result = None
-    number = input_prompt.text()
-    input_prompt.clear()
-    symbols = ['/', '*', '+', '-']
-    for i in symbols:
-        if i in number:
-            numberlist = number.split(i)
-            symbol = i
-    if len(numberlist) == 2:
-        num1 = float(numberlist[0])
-        num2 = float(numberlist[1])
-        if symbol == '/':
-            result = str(num1 / num2)
-        elif symbol == '*':
-            result = str(num1 * num2)
-        elif symbol == '+':
-            result = str(num1 + num2)
-        elif symbol == '-':
-            result = str(num1 - num2)
-    display2.setText(result)
+    try:
+        result = None
+        number = input_prompt.text()
+        input_prompt.clear()
+        symbols = ['/', '*', '+', '-']
+        for i in symbols:
+            if i in number:
+                numberlist = number.split(i)
+                symbol = i
+        if len(numberlist) == 2:
+            num1 = float(numberlist[0])
+            num2 = float(numberlist[1])
+            if symbol == '/':
+                result = str(num1 / num2)
+            elif symbol == '*':
+                result = str(num1 * num2)
+            elif symbol == '+':
+                result = str(num1 + num2)
+            elif symbol == '-':
+                result = str(num1 - num2)
+        display2.setText(result)
+    except:
+        pass
 
 app = QApplication([])
 w = QWidget()
