@@ -1,5 +1,4 @@
-from PyQt6.QtWidgets import QApplication, QLineEdit, QLabel, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QTextEdit
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QTextEdit
 
 def addnum(num):
     global num1
