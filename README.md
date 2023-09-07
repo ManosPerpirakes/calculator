@@ -1,1 +1,0 @@
-In order to input a negative number (e.g. num) to the program please enter (0-num) and press '=' because the program does not accept negative numbers otherwise. You can still use negative numbers in a manner such as '5+-1' (note, a parenthesis cannot be used). Apologies for any inconvenience.

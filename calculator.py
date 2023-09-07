@@ -199,30 +199,45 @@ def square():
 def squareroot():
     power(1/2)
 
-def calculate():
+def neg():
     try:
-        result = None
-        number = input_prompt.text()
-        input_prompt.clear()
-        symbols = ['/', '*', '+', '-']
-        for i in symbols:
-            if i in number:
-                numberlist = number.split(i)
-                symbol = i
-        if len(numberlist) == 2:
-            num1 = float(numberlist[0])
-            num2 = float(numberlist[1])
-            if symbol == '/':
-                result = str(num1 / num2)
-            elif symbol == '*':
-                result = str(num1 * num2)
-            elif symbol == '+':
-                result = str(num1 + num2)
-            elif symbol == '-':
-                result = str(num1 - num2)
-        display2.setText(result)
+        global num1
+        global num2
+        global displaytext
+        if num2 == '':
+            times = len(num1)
+            num1 = float(num1)
+            num1 *= -1
+            num1 = str(num1)
+            numlocal = num1
+        else:
+            times = len(num2)
+            num2 = float(num2)
+            num2 *= -1
+            num2 = str(num2)
+            numlocal = num2
+        displaytextlocal = []
+        counter = times
+        for i in range(times):
+            displaytextlocal.append(displaytext[len(displaytext)-(counter+1)])
+            counter -= 1
+        displaytextlocal2 = []
+        for i in range(len(displaytext)-times):
+            displaytextlocal2.append(displaytext[i])
+        displaytext = ''
+        for i in displaytextlocal2:
+            displaytext += i
+        for i in range(times):
+            displaytextlocal.remove(displaytextlocal[len(displaytextlocal)-1])
+        displaytextlocal.append('(')
+        for i in numlocal:
+            displaytextlocal.append(str(i))
+        displaytextlocal.append(')')
+        for i in displaytextlocal:
+            displaytext += i
+        refresh()
     except:
-        pass
+        reset()
 
 app = QApplication([])
 w = QWidget()
@@ -234,7 +249,6 @@ total = None
 displaytext = ''
 w.setWindowTitle('Calculator')
 w.resize(300, 500)
-l1 = QLabel('Use these controls')
 pb1 = QPushButton('1')
 pb2 = QPushButton('2')
 pb3 = QPushButton('3')
@@ -255,14 +269,9 @@ pb17 = QPushButton('Reset')
 pb18 = QPushButton('Erase')
 pb19 = QPushButton('x*x')
 pb20 = QPushButton('squareroot')
-pb21 = QPushButton('calculate')
+pb21 = QPushButton('+/-')
 display = QTextEdit()
 display.setReadOnly(True)
-l2 = QLabel('Or use the controls below')
-display2 = QTextEdit()
-display2.setReadOnly(True)
-input_prompt = QLineEdit()
-input_prompt.setPlaceholderText('type here(example: 5.3+9.5):')
 lh1 = QHBoxLayout()
 lh2 = QHBoxLayout()
 lh3 = QHBoxLayout()
@@ -287,20 +296,16 @@ lh4.addWidget(pb10)
 lh4.addWidget(pb15)
 lh4.addWidget(pb14)
 lh5.addWidget(pb17)
+lh5.addWidget(pb21)
 lh5.addWidget(pb18)
 lh5.addWidget(pb19)
 lh5.addWidget(pb20)
-lv1.addWidget(l1, alignment = Qt.AlignmentFlag.AlignHCenter)
 lv1.addWidget(display)
 lv1.addLayout(lh1)
 lv1.addLayout(lh2)
 lv1.addLayout(lh3)
 lv1.addLayout(lh4)
 lv1.addLayout(lh5)
-lv1.addWidget(l2, alignment = Qt.AlignmentFlag.AlignHCenter)
-lv1.addWidget(display2)
-lh6.addWidget(input_prompt)
-lh6.addWidget(pb21)
 lv1.addLayout(lh6)
 w.setLayout(lv1)
 w.show()
@@ -324,5 +329,5 @@ pb17.clicked.connect(reset)
 pb18.clicked.connect(erase)
 pb19.clicked.connect(square)
 pb20.clicked.connect(squareroot)
-pb21.clicked.connect(calculate)
+pb21.clicked.connect(neg)
 app.exec()
