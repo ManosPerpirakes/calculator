@@ -58,16 +58,24 @@ def dot():
     addnum('.')
 
 def add():
-    addsymbol('+')
+    global other
+    if other == '' or other == None:
+        addsymbol('+')
 
 def remove():
-    addsymbol('-')
+    global other
+    if other == '' or other == None:
+        addsymbol('-')
 
 def multiply():
-    addsymbol('*')
+    global other
+    if other == '' or other == None:
+        addsymbol('*')
 
 def divide():
-    addsymbol('/')
+    global other
+    if other == '' or other == None:
+        addsymbol('/')
 
 def equals():
     global other
@@ -85,12 +93,13 @@ def equals():
             result = float(num1) * float(num2)
         elif other == '/':
             result = float(num1) / float(num2)
-        num1 = str(result)
-        num2 = ''
-        other = ''
-        displaytext += '\n' + str(result)
-        result = None
-        refresh()
+        if not (other == '' or other == None):  
+            num1 = str(result)
+            num2 = ''
+            other = ''
+            displaytext += '\n' + str(result)
+            result = None
+            refresh()
     except:
         reset()
 
@@ -138,11 +147,8 @@ def erase():
             for i in symbols:
                 if total.find(i) >= 0:
                     counter += 1
-                    if total.find(i) == len(total) - 1:
+                    if total.find(i) == (len(total) - 1):
                         IsAtTheEnd = True
-                    if other != None or other != '':
-                        IsAtTheEnd = False
-                        counter = 0
             if counter != 0:
                 if IsAtTheEnd:
                     fvar = other
